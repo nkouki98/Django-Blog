@@ -4,13 +4,14 @@ from django.contrib import messages
 from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as log_in
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+
             return redirect('home')
     else:
         form = CustomUserCreationForm()
@@ -20,16 +21,6 @@ def register(request):
     return render(request, "users/register.html", context)
 
 
-
-def login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            log_in(request, user)
-            return redirect('home')
-        else:
-            messages.info(request, 'Username or Password is incorrect')
-    context = {}
-    return render(request, 'users/login.html', context)
+@login_required
+def profile(request):
+    return render(request, 'users/profile.html')
