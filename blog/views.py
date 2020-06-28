@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from .models import blogPost
+from .models import Post
 
 # Create your views here.
 
 
 
 def home(request):
-    context = {'posts': blogPost.objects.all()}
+    context = {'posts': Post.objects.all()}
     return render(request, "blog/home.html", context)

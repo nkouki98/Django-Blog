@@ -1,17 +1,16 @@
 from django.db import models
 from django.utils import timezone
-from users.models import customUser
+from users.models import CustomUser
 # Create your models here.
 
 
 
-class blogPost(models.Model):
+class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey(customUser, on_delete=models.CASCADE)
-
-
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    image = models.ImageField(default='default.jpg', upload_to='blog_pics')
 
     def __str__(self):
         return self.title

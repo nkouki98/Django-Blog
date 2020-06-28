@@ -31,7 +31,7 @@ class CustomUserManager(BaseUserManager):
         return user
 
 
-class customUser(AbstractUser):
+class CustomUser(AbstractUser):
     username = models.CharField(max_length=100, unique=True)
     email = models.EmailField(verbose_name="email", max_length=100, unique=True)
 
@@ -47,8 +47,8 @@ class customUser(AbstractUser):
 
 
 
-class userProfile(models.Model):
-    user = models.OneToOneField(customUser, on_delete=models.CASCADE)
+class Profile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
     def __str__(self):
