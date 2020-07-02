@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from PIL import Image
 # Create your models here.
 
 class CustomUserManager(BaseUserManager):
@@ -19,16 +20,16 @@ class CustomUserManager(BaseUserManager):
          return user
 
      def create_superuser(self, email, username, password):
-        user = self.create_user(
+         user = self.create_user(
             email=self.normalize_email(email),
             password=password,
             username=username,
         )
-        user.is_admin=True
-        user.is_staff=True
-        user.is_superuser=True
-        user.save(using=self._db)
-        return user
+         user.is_admin=True
+         user.is_staff=True
+         user.is_superuser=True
+         user.save(using=self._db)
+         return user
 
 
 class CustomUser(AbstractUser):
@@ -53,3 +54,14 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.username}'
+
+
+    #override save method
+    def save(self):
+        super().save()
+
+        img = Image.open(self.image.path)
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
