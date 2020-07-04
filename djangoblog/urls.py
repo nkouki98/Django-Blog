@@ -27,9 +27,9 @@ urlpatterns = [
     path('', blog_views.home, name='home'),
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
-    #path('profile/<int:pk>/', user_views.displayProfile, name='profile'),
+    path('profile/(?P<username>[a-zA-Z0-9]+)$/', user_views.displayProfile, name='userprofile'),
     path('login/', user_unauthenticated(auth_views.LoginView.as_view(template_name='users/login.html')), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout')
+    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
 
 ]
 if settings.DEBUG:

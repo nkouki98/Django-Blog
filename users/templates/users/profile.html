@@ -22,4 +22,23 @@
           </div>
       </form>
     </div>
+
+  {% for post in posts %}
+    <div class="card mb-4">
+          <img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap">
+          <div class="card-body">
+            <h2 class="card-title">{{ post.title }}</h2>
+            <p class="card-text">{{ post.content }}</p>
+            <a href="#" class="btn btn-outline-secondary">Read More &rarr;</a>
+          </div>
+        <div class="card-footer text-muted">
+
+            Posted on {{ post.date_posted|date:"F d, Y" }} by
+            {% if user.is_authenticated %}
+            <a href="{% url 'userprofile' post.author.username %}">
+            {% endif %}
+           {{ post.author.username }}</a>
+          </div>
+        </div>
+ {% endfor %}
 {% endblock content %}
