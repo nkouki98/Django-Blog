@@ -33,7 +33,7 @@ def login(request):
 
 @login_required
 def profile(request):
-     if request.method == 'POST':
+     if request.method == 'POST':                #HTTP request POST
          form_u = UserUpdateForm(request.POST, instance=request.user)
          form_p = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
          if form_u.is_valid() and form_p.is_valid():
@@ -41,7 +41,7 @@ def profile(request):
              form_p.save()
              messages.success(request, f'Profile successfully updated!')
              return redirect('profile')
-     else:
+     else:                                      ## "HTTP" GET request
          form_u = UserUpdateForm(instance=request.user)
          form_p = ProfileUpdateForm(instance=request.user.profile)
      context = {'form_u': form_u, 'form_p':form_p}

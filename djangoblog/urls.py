@@ -21,10 +21,12 @@ from django.conf.urls.static import static
 from users import views as user_views
 from blog import views as blog_views
 from users.decorators import user_unauthenticated
+from blog.views import PostlistView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', blog_views.home, name='home'),
+    #path('', blog_views.home, name='home'),
+    path('', PostlistView.as_view(), name='home'),
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
     path('profile/(?P<username>[a-zA-Z0-9]+)$/', user_views.displayProfile, name='userprofile'),
