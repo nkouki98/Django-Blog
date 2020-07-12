@@ -30,8 +30,11 @@
               <a class="mr-2">{{ post.author.username }}</a>
               <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
             </div>
+
+              <img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap">
+
             <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content }}</p>
+            <p class="article-content">{{ post.content|slice:":300" }}...</p>
           </div>
         </article>
     {% endfor %}

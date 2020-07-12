@@ -25,9 +25,7 @@ def register(request):
 
 
 
-@user_unauthenticated
-def login(request):
-    return render(request, "users/login.html")
+
 
 
 

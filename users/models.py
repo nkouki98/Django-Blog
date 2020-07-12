@@ -54,7 +54,7 @@ class Profile(models.Model):
 
 
     def __str__(self):
-        return f'{self.user.username}'
+        return f'{self.user.username} Profile'
 
 
     #override save method

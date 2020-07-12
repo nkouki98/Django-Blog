@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Post
-from django.views.generic import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView, CreateView
 # Create your views here.
 
 
@@ -12,7 +13,7 @@ def home(request):
     return render(request, "blog/home.html", context)
 '''
 
-class PostlistView(ListView):
+class PostListView(ListView):
     """A better approach is class based views for CRUD applications
     to function based like -> above home(request). Prevents repetitive code, helps with reuseability, structure
     and extendability."""
@@ -22,3 +23,14 @@ class PostlistView(ListView):
     ordering = ['-date_posted']  # '-' for new->old
 
 
+class PostDetailView(DetailView):
+    model = Post
+
+
+class PostCreateView(LoginRequiredMixin, CreateView):        # searches for post_form template
+    model = Post
+    fields = ['title', 'content', 'image',]
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)  # run form_valid method on parent class with form as arg
