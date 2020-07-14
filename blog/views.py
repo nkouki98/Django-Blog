@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Post
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 # Create your views here.
 
 
@@ -29,8 +29,23 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):        # searches for post_form template
     model = Post
-    fields = ['title', 'content', 'image',]
+    fields = ['title', 'content', 'image']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)  # run form_valid method on parent class with form as arg
+
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # searches for post_form template
+    model = Post
+    fields = ['title', 'content', 'image']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)  # run form_valid method on parent class with form as arg
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
