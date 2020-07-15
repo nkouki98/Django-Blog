@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from users import views as user_views
 from blog import views as blog_views
 from users.decorators import user_unauthenticated
-from blog.views import PostListView, PostDetailView, PostCreateView, PostUpdateView
+from blog.views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView
 urlpatterns = [
 
     path('admin/', admin.site.urls),
@@ -29,6 +29,9 @@ urlpatterns = [
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
+    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
+
+    #-------------------------------------------------------------------------------#
 
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),

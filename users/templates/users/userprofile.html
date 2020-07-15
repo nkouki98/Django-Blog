@@ -8,22 +8,16 @@
         <div class="media-body">
           <h2 class="account-heading">{{ user.username }}</h2>
           <p class="text-secondary">{{ user.email }}</p>
-        </div>
-          {% if user == request.user %}
-          <div class="form-group">
-              <a href="{% url 'profile' %}" class="btn btn-outline-secondary">UPDATE</a>
-          </div>
+           {% if user == request.user %}
+              <a href="{% url 'profile' %}" class="btn btn-secondary btn-sm mt-1 mb-1">UPDATE</a>
           {% endif %}
+        </div>
       </div>
       <form method="POST" enctype="multipart/form-data">
-          {% csrf_token %}
           <fieldset class="form-group">
               <legend class="border-bottom mb-4">Profile</legend>
 
           </fieldset>
-          <div class="form-group">
-
-          </div>
       </form>
     </div>
 <div>
