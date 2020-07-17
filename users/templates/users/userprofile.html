@@ -29,13 +29,14 @@
               <a class="mr-2">{{ post.author.username }}</a>
               <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
             </div>
-
-              <img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap">
-
             <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content|slice:":300" }}...</p>
+            <p class="article-content">{{ post.content|slice:":150" }}...</p>
+              <a href="{% url 'post-detail' post.id %}" class="btn btn-outline-secondary mb-4">Read More &rarr;</a>
           </div>
         </article>
     {% endfor %}
     </div>
+
+
+
 {% endblock content %}
