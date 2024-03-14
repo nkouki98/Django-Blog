@@ -1,0 +1,6 @@
+# Pillow for image processing
+Pillow==8.4.0
+
+# Crispy Bootstrap4 for styling Django forms
+django-crispy-forms==1.12.0
+django-bootstrap4==2.3.1
