@@ -3,13 +3,13 @@
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/your-project.git
+    git clone https://github.com/nkouki98/django-blog.git
     ```
 
 2. **Navigate to the project directory:**
 
     ```bash
-    cd your-project
+    cd django-blog
     ```
 
 3. **Create a virtual environment:**
