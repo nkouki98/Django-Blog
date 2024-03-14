@@ -4,3 +4,6 @@ Pillow==8.4.0
 # Crispy Bootstrap4 for styling Django forms
 django-crispy-forms==1.12.0
 django-bootstrap4==2.3.1
+
+# Gunicorn for serving Django in production
+gunicorn==20.1.0
